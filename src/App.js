@@ -1,9 +1,10 @@
 import React from "react";
+import styled from "styled-components";
+import {Route} from "react-router-dom";
+
 // BucketList 컴포넌트를 import 해옵니다. import [컴포넌트 명] from [컴포넌트가 있는 파일경로];
 import BucketList from "./BucketList";
 import Detail from "./Detail";
-import styled from "styled-components";
-import {Route} from "react-router-dom";
 
 function App() {
 
@@ -17,23 +18,22 @@ function App() {
             text.current.value
         ]);
     }
+
+    console.log(list);
     return (
         <div className="App">
-            <Route path="/" exact component={App}>
-            
             <Container>
                 <Title>내 버킷리스트</Title>
                 <Line/> {/* 컴포넌트를 넣어줍니다. */}
                 {/* <컴포넌트 명 [props 명]={넘겨줄 것(리스트, 문자열, 숫자, ...)}/> */}
-                    <BucketList list={list}/>
+                <Route path="/" exact render={(props) => (<BucketList list={list}/>)}/>
+                <Route path="/detail" component={Detail}/>
             </Container>
             {/* 인풋박스와 추가하기 버튼을 넣어줬어요. */}
             <Input>
                 <input type="text" ref={text}/>
                 <button onClick={addBucketList}>추가하기</button>
             </Input>
-            </Route>
-            <Route path="/detail" render={() => <Detail detail={text, addBucketList}/>}></Route>
         </div>
     );
 }

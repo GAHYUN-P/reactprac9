@@ -1,12 +1,12 @@
 // 리액트 패키지를 불러옵니다.
 import React from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
-import Detail from "./Detail";
+
+import {useHistory} from "react-router-dom";
 
 const BucketList = (props) => {
-    console.log(props);
     let history = useHistory();
+    console.log(props);
     const my_lists = props.list;
 
     return (
@@ -14,9 +14,12 @@ const BucketList = (props) => {
             {
                 my_lists.map((list, index) => {
                     return (
-                        <ItemStyle className="list_item" key={index} onClick={() => {
-                            history.push("/Detail");
-                        }}>
+                        <ItemStyle
+                            className="list_item"
+                            key={index}
+                            onClick={() => {
+                                history.push("/detail");
+                            }}>
                             {list}
                         </ItemStyle>
                     );
