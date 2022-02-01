@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import {Route} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 
 // BucketList 컴포넌트를 import 해옵니다. import [컴포넌트 명] from [컴포넌트가 있는 파일경로];
 import BucketList from "./BucketList";
 import Detail from "./Detail";
+import NotFound from "./NotFound";
 
 function App() {
 
@@ -26,8 +27,14 @@ function App() {
                 <Title>내 버킷리스트</Title>
                 <Line/> {/* 컴포넌트를 넣어줍니다. */}
                 {/* <컴포넌트 명 [props 명]={넘겨줄 것(리스트, 문자열, 숫자, ...)}/> */}
-                <Route path="/" exact render={(props) => (<BucketList list={list}/>)}/>
-                <Route path="/detail" component={Detail}/>
+                <Switch>
+                    <Route path="/" exact render={(props) => (<BucketList list={list}/>)}/>
+                    <Route path="/detail" component={Detail}/>
+                    <Route component={NotFound}/>
+                </Switch>
+                {/* 스위치 안에 있는 경로들을 하나씩 하나씩 비교하고 전부 안맞으면 
+                패스 지정 안한 마지막 경로가 뜸 */}
+
             </Container>
             {/* 인풋박스와 추가하기 버튼을 넣어줬어요. */}
             <Input>
